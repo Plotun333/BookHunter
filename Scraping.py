@@ -74,12 +74,12 @@ def retrieve_all_products(tag1,class1,tag2):
         for element in all_products:
             f = element.find(tag2)
             found.append(f.get_text())
-    elif class1 ==11:
+    elif class1 == 11:
         all_products = soup.find_all(tag1, class_='right-block')
         for element in all_products:
             f = element.find(tag2)
             found.append(f.get_text())
-    elif class1 ==12:
+    elif class1 == 12:
         all_products = soup.find_all(tag1, class_='node-inner')
         for element in all_products:
             f = element.find('h2')
@@ -218,7 +218,6 @@ def retrieve_all_products(tag1,class1,tag2):
             found.append(f.get_text())
             f = element.find('p')
             found.append(f.get_text())
-
     elif class1 == 29:
         all_products = soup.find_all(tag1, class_='item_info')
         for element in all_products:
@@ -226,8 +225,49 @@ def retrieve_all_products(tag1,class1,tag2):
             found.append(f.get_text())
             f = element.find('p')
             found.append(f.get_text())
+    elif class1 == 30:
+        all_products = soup.find_all('div',class_='book_txt')
 
+        for element in all_products:
+            f = element.find('div')
+            found.append(f.get_text())
+        for element in all_products:
+            f = element.find('h3')
+            found.append(f.get_text())
+    elif class1 == 31:
+        all_products = soup.find_all('div', class_='index_obsah_vnutri_kniha_autor')
+        for element in all_products:
+            try:
+                f = element.find('a')
+                found.append(f.get_text())
 
+            except AttributeError:
+                pass
+        all_products = soup.find_all('h2', class_='index_obsah_vnutri_kniha_nazov')
+        for element in all_products:
+            try:
+                f = element.find('a')
+                found.append(f.get_text())
+
+            except AttributeError:
+                pass
+    elif class1 == 32:
+        all_products = soup.find_all(tag1, class_='productTitleContent')
+        for element in all_products:
+            f = element.find(tag2)
+            found.append(f.get_text())
+    elif class1 == 33:
+        all_products = soup.find_all(tag1)
+        for element in all_products:
+            try:
+                f = element.find(tag2)
+                found.append(f.get_text())
+            except AttributeError:
+                pass
+    elif class1 == 34:
+        all_products = soup.find_all(tag1, class_='caption')
+        for element in all_products:
+            found.append(element.get_text())
     return found
 
 
@@ -236,11 +276,12 @@ def retrieve_all_products(tag1,class1,tag2):
 
 def checkforkey(found,website,allfound):
     Hunted = []
-    keywords = ['','Sutnar', "Teige", "Drtikol", "Devětsil", "Friml", "Fulla", "Halabala", "Sudek", "Hesoun",
+    # aka has been taken out // ehm // bydleni // AUKRO http://www.antikvariat-cejka.com/
+    keywords = ['lovci','Sutnar', "Teige", "Drtikol", "Devětsil", "Friml", "Fulla", "Halabala", "Sudek", "Hesoun",
                 "Index Olomouc", "Jazzpetit", "Valoch", "Kalivoda", "Dyrynk",'Rudolf Prokop','1947 skupiny ra',
                 'Umeni mladych vytvarniku Ceskoslovenska', '33 dopisy SSSR', 'abc dyalektyckeho materializmu',
                 'Acta incognitorum', 'adamus', 'Adolf Chaloupka', 'ADRIAPORT', 'AFK Bohemians', 'Aforismy Smazik Rudolf',
-                'Aka', 'akcni tvorba', 'akrobat', 'aktuality budovani', 'Alexandr blok', 'ALMANACH LOUNSKEHO STUDENTSTVA',
+                 'akcni tvorba', 'akrobat', 'aktuality budovani', 'Alexandr blok', 'ALMANACH LOUNSKEHO STUDENTSTVA',
                 'Almanach Narodniho divadla', 'almanach pro poesii', 'Almanach secese', 'Alois Wachsman', 'amazonka 1928',
                 'amazonsky proud 1923', 'ambientni hudba industrial', 'American 1948 fast', 'Americane Leningrade',
                 'Amor psyche Souckova', 'Anebo 1918', 'anonym', 'Antar', 'Antonin Heythum', 'apollinaire fantasie',
@@ -254,7 +295,7 @@ def checkforkey(found,website,allfound):
                 'Bojacni rvac', 'Boleslav Vomacka', 'Bolsevicky raj', 'Bolsevikem 1921', 'Bolsevismu', 'bonaventury',
                 'Borecky', 'botas', 'BOUS', 'Nasi umelci', 'Bozi muka 1917', 'bozstva kulty', 'Bradac 1908', 'Bradac Ludvik',
                 'Bragozda', 'braillovo pismo', 'Brazda', 'brichomluvec', 'Brikcius', 'Brixenske basne', 'Brnenska Leva fronta',
-                'Brodheim', 'Buchler Pavel', 'Bude vojna bude', 'bydleni', 'Byt umeni', 'bytova kultura', 'Caje o pate',
+                'Brodheim', 'Buchler Pavel', 'Bude vojna bude','Byt umeni', 'bytova kultura', 'Caje o pate',
                 'capek', 'capek nove doby', 'Casopis ceskoslovenky inzenyru architkturu', 'Casopis ceskoslovenky inzenyru architkturu 1924',
                 'Casopis ceskoslovenky inzenyru architkturu 1925', 'cechische', 'Cechoslovacka muzicka kultura',
                 'CEKANI NA GODOTA', 'Cellularni mysleni', 'celokozena', 'cerminova', 'Cerne ruze', 'cerven', 'Cesky Interieur',
@@ -310,15 +351,15 @@ webpages = ["http://antikvariat-fryc.cz/", "http://antikvariat-malyctenar.cz/", 
             'http://www.antikvakorunni75.cz/novinky-v-katalogu','https://www.antik-variat.cz/cz-kategorie_164662-0-internetovy-antikvariat.html',
             'http://www.antikvariat-olomouc.cz/cz-sekce-novinky.html',
 
-            'http://www.antikvariat-smichov.cz/index.php?page=knihy&kategorie=&od=&vypis=0',# 'http://www.antikvariat-susice.cz/index.php?typ=php&kategorie=novinky',
+            'http://www.antikvariat-smichov.cz/index.php?page=knihy&kategorie=&od=&vypis=0',
             'http://www.antikvariatukostela.cz/cz-kategorie_447699-0-nove-pridane-knihy-nejlepsi-vanocni-darky.html',
             'http://www.antikvariat-vltavin.cz/', 'http://www.antikvariaty.cz/', 'http://www.karelkrenek.com/news.php?lang=cz',
             'http://www.knizky.com/index.php?Akce=Prove%EF&CenterFrame=hledej.php&LeftFrame=prohlmenu.php&order_id=7&order_dir=1',
             'http://www.samota.cz/katonline/nov/nov.html', 'http://www.spalena53.cz/knihy/', 'http://www.valentinska.cz/home',
             'https://www.antikvariat-divis.cz/cze/novinky', 'https://www.antikvariatchrudim.cz/',
             'https://www.antikalfa.cz/bibliofilie/', 'http://antikvariat-bohemia.cz/', 'http://antikvariat-cypris.cz/novinky.php',
-            'https://aukro.cz/knihy-a-casopisy?sort=startingTime_DESC', 'http://www.antikvariat-benes.cz/antikvariat/901-novinky.html?rp',
-            'http://www.antikvariat-cejka.com/', 'http://www.antikvariatik.sk/?podstranka=novinky&zoradenie=&poradie=&start=0#index_obsah_vnutri_vysledky',
+             'http://www.antikvariat-benes.cz/antikvariat/901-novinky.html?rp',
+            'http://www.antikvariatik.sk/?podstranka=novinky&zoradenie=&poradie=&start=0#index_obsah_vnutri_vysledky',
             'http://www.antikvariat-janos.cz/', 'http://www.antikvariatkarlin.cz/', 'http://www.antikvariatpocta.cz/novinky',
             'http://www.antikvariat-trutnov.com/novinky-dne', 'http://www.antikvariaty.com/auction/index.php',
             'http://www.antikvariat-zlin.cz/', 'http://www.e-antikvariat.com', 'http://www.e-antikvariat.cz/',
@@ -326,12 +367,13 @@ webpages = ["http://antikvariat-fryc.cz/", "http://antikvariat-malyctenar.cz/", 
             'http://www.levnyantikvariat.cz/czech/', 'http://www.shioriantikvariat.cz/', 'http://www.tichyantikvariat.cz/index.php?pg=katalog&akce=katalog&kat=5',
             'http://www.trigon-knihy.cz/', 'http://www.ztichlaklika.cz/antikvariat?page=1', 'https://antikvarium.cz/', 'https://www.artbook.cz/collections/akutalni-nabidka',
             'http://www.antikvariat-delta.cz/Novinky-RIJEN-c45_0_1.htm', 'https://www.novemportis.cz/cs/',
-            'https://antikvariatelement.cz/novinky']
-
+            'https://antikvariatelement.cz/novinky','http://www.antikvariat-susice.cz/index.php?typ=php&kategorie=novinky']
+#'https://aukro.cz/knihy-a-casopisy?sort=startingTime_DESC',
 
 
 alltags1 = ['div','div','div','div','div','p','div','div','div','div','div','div','div','div','div','div','div','div','div',
-            'h2','div','div','div','div','div','h2','costom','font','costum','costum','div','div','div','div','div','div']#19
+            'h2','div','div','div','div','div','h2','costom','font','costum','costum','div','div','div','div','div','div','div','none','div','div',
+            'div']#19
 
 #allclasses
 #1 => para grow alt-odd
@@ -349,16 +391,16 @@ alltags1 = ['div','div','div','div','div','p','div','div','div','div','div','div
 #13 => kniha(popis)
 #14 => title
 #15 => akce_foto
-#! => productTitleContent
+#32 => productTitleContent
 #16 => nazev
 #17 => costom with <a>
 #18 =>polozka
 #24 => name
 
 
-allclasses = [1,2,2,2,3,4,5,6,7,8,9,2,10,2,2,2,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,2,29]#19
+allclasses = [1,2,2,2,3,4,5,6,7,8,9,2,10,2,2,2,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,2,29,30,31,32,33,34]#19
 alltags2 = ['h3','h3','h3','h3','h3','a','h3','h3','costum','costum','a','h3','h3','h3','h3','h3','a','costum','costum',
-            'costom','a','a','a','a','costom','a','costom','none','costum','none','div','h2','div','h2','h3','h3']#19
+            'costom','a','a','a','a','costom','a','costom','none','costum','none','div','h2','div','h2','h3','h3','h2','none','a','h2','pass']#19
 
 print(len(alltags1))
 print(len(alltags2))
@@ -371,6 +413,7 @@ print('\n')
 print('Looking into: '+str(len(webpages))+' webpages')
 print('\n')
 index = 0
+procent = int(100/len(webpages))
 #main loop
 for web in webpages:
     page = requests.get(web)
@@ -383,14 +426,14 @@ for web in webpages:
 
     if __name__ == '__main__':
         found = retrieve_all_products(alltags1[index],allclasses[index],alltags2[index])
-        Hunted = checkforkey(found,web,all)
+        Hunted = checkforkey(found, web, all)
         print(len(Hunted) > 0)
         print('\n')
-        #if len(Hunted)>0:
-
-         #   for element in Hunted:
-                #print(element)
-        #        all.append(element)
+    #for element in Hunted:
+    #   print(element)
+    #    print('------------------------------------------------------')
+    #    all.append(element)
+    #    print('\n')
 
 
     index = index+1
