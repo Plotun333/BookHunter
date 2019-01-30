@@ -268,6 +268,69 @@ def retrieve_all_products(tag1,class1,tag2):
         all_products = soup.find_all(tag1, class_='caption')
         for element in all_products:
             found.append(element.get_text())
+    elif class1 == 35:
+        all_products = soup.find_all(tag1, class_='produkt')
+        for element in all_products:
+            f = element.find(tag2)
+            found.append(f.get_text())
+    elif class1 == 36:
+        all_products = soup.find_all(tag1, class_='pname')
+        for element in all_products:
+            f = element.find(tag2)
+            found.append(f.get_text())
+    elif class1 == 37:
+        all_products = soup.find_all(tag1, class_='book')
+        for element in all_products:
+            f = element.find(tag2)
+            found.append(f.get_text())
+            p = element.find('p')
+            found.append(p.get_text())
+    elif class1 == 38:
+        all_products = soup.find_all(tag1, class_='produkt pst-novinka')
+        for element in all_products:
+            f = element.find(tag2)
+            found.append(f.get_text())
+    elif class1 == 39:
+        all_products = soup.find_all(tag1)
+        try:
+            for f in all_products:
+                found.append(f.get_text())
+        except AttributeError:
+            pass
+    elif class1 == 40:
+        all_products = soup.find_all(tag2)
+        try:
+            for element in all_products:
+
+                found.append(element.get_text())
+        except AttributeError:
+            pass
+    elif class1 == 41:
+        all_products = soup.find_all(tag1, class_='book_thumb')
+        for element in all_products:
+            f = element.find(tag2)
+            found.append(f.get_text())
+    elif class1 == 42:
+        all_products = soup.find_all(tag1, class_='productList__description')
+        for element in all_products:
+            f = element.find(tag2)
+            found.append(f.get_text())
+    elif class1 == 43:
+        all_products = soup.find_all(tag1, class_='grid__item seven-tenths')
+        for element in all_products:
+            f = element.find(tag2)
+            found.append(f.get_text())
+            f = element.find('p')
+            found.append(f.get_text())
+    elif class1 == 44:
+        all_products = soup.find_all(tag1, class_='product-name')
+        for element in all_products:
+            f = element.find(tag2)
+            found.append(f.get_text())
+            f = element.find('span')
+            found.append(f.get_text())
+
+
     return found
 
 
@@ -277,7 +340,7 @@ def retrieve_all_products(tag1,class1,tag2):
 def checkforkey(found,website,allfound):
     Hunted = []
     # aka has been taken out // ehm // bydleni // AUKRO http://www.antikvariat-cejka.com/
-    keywords = ['lovci','Sutnar', "Teige", "Drtikol", "Devětsil", "Friml", "Fulla", "Halabala", "Sudek", "Hesoun",
+    keywords = ['Sutnar', "Teige", "Drtikol", "Devětsil", "Friml", "Fulla", "Halabala", "Sudek", "Hesoun",
                 "Index Olomouc", "Jazzpetit", "Valoch", "Kalivoda", "Dyrynk",'Rudolf Prokop','1947 skupiny ra',
                 'Umeni mladych vytvarniku Ceskoslovenska', '33 dopisy SSSR', 'abc dyalektyckeho materializmu',
                 'Acta incognitorum', 'adamus', 'Adolf Chaloupka', 'ADRIAPORT', 'AFK Bohemians', 'Aforismy Smazik Rudolf',
@@ -338,19 +401,20 @@ def checkforkey(found,website,allfound):
 
     #retrun all found elements
     return Hunted
-        #deleted http://www.antik-klariani.cz/products_new.html\\'http://www.antikvariatik.cz/'kamyk//http://www.antikvariatnachod.cz/produkt.phtml?kat=newest
+        # deleted
+        # http://www.antik-klariani.cz/products_new.html
+        # http://www.antikvariatik.cz/'kamyk
+        # http://www.antikvariatnachod.cz/produkt.phtml?kat=newest
 webpages = ["http://antikvariat-fryc.cz/", "http://antikvariat-malyctenar.cz/", "http://antikvariatostrov.cz/?mn_offs=21",
             "http://antikvariat-pce.cz/","http://antikvariat-vinohradska.cz/", "http://dva-antikvari.cz/nabidka/strana/1",
             "http://www.antik-bilevrany.cz/?strana=1", "http://www.antikbuddha.com/czech/article.php?new=1&test=Y",
             "http://www.antiknarynku.cz/","http://www.dantikvariat.cz/nabidka-knihy","https://www.podzemni-antikvariat.cz/",
-            #samples
             'http://antik-stafl.cz/', 'http://antikvariat.obchodsvitavy.cz/category.php?id_category=2',
             'http://antikvariat-avion.cz/', 'http://antikvariatmorava.cz/',
             'http://antikvariat-prelouc.cz/', 'http://shop.kniharium.eu/', 'http://www.adplus.cz/katalog/novinky',
             'http://www.antikopava.cz/prodej-knih/novinky',
             'http://www.antikvakorunni75.cz/novinky-v-katalogu','https://www.antik-variat.cz/cz-kategorie_164662-0-internetovy-antikvariat.html',
             'http://www.antikvariat-olomouc.cz/cz-sekce-novinky.html',
-
             'http://www.antikvariat-smichov.cz/index.php?page=knihy&kategorie=&od=&vypis=0',
             'http://www.antikvariatukostela.cz/cz-kategorie_447699-0-nove-pridane-knihy-nejlepsi-vanocni-darky.html',
             'http://www.antikvariat-vltavin.cz/', 'http://www.antikvariaty.cz/', 'http://www.karelkrenek.com/news.php?lang=cz',
@@ -361,80 +425,108 @@ webpages = ["http://antikvariat-fryc.cz/", "http://antikvariat-malyctenar.cz/", 
              'http://www.antikvariat-benes.cz/antikvariat/901-novinky.html?rp',
             'http://www.antikvariatik.sk/?podstranka=novinky&zoradenie=&poradie=&start=0#index_obsah_vnutri_vysledky',
             'http://www.antikvariat-janos.cz/', 'http://www.antikvariatkarlin.cz/', 'http://www.antikvariatpocta.cz/novinky',
-            'http://www.antikvariat-trutnov.com/novinky-dne', 'http://www.antikvariaty.com/auction/index.php',
-            'http://www.antikvariat-zlin.cz/', 'http://www.e-antikvariat.com', 'http://www.e-antikvariat.cz/',
+            'http://www.antikvariat-trutnov.com/novinky-dne', 'http://www.e-antikvariat.com/index.php?lang=cs',
+            'http://www.antikvariat-zlin.cz/',
             'http://www.galerie-ilonka.cz/galerie-ilonka/eshop/9-1-Antikvariat', 'http://www.leonclifton.cz/novinky?page=0&amp;size=50',
             'http://www.levnyantikvariat.cz/czech/', 'http://www.shioriantikvariat.cz/', 'http://www.tichyantikvariat.cz/index.php?pg=katalog&akce=katalog&kat=5',
-            'http://www.trigon-knihy.cz/', 'http://www.ztichlaklika.cz/antikvariat?page=1', 'https://antikvarium.cz/', 'https://www.artbook.cz/collections/akutalni-nabidka',
+            'https://www.trigon-knihy.cz/trigon-1990-2018/', 'http://www.ztichlaklika.cz/antikvariat?page=1', 'https://antikvarium.cz/', 'https://www.artbook.cz/collections/akutalni-nabidka',
             'http://www.antikvariat-delta.cz/Novinky-RIJEN-c45_0_1.htm', 'https://www.novemportis.cz/cs/',
             'https://antikvariatelement.cz/novinky','http://www.antikvariat-susice.cz/index.php?typ=php&kategorie=novinky']
 #'https://aukro.cz/knihy-a-casopisy?sort=startingTime_DESC',
 
 
-alltags1 = ['div','div','div','div','div','p','div','div','div','div','div','div','div','div','div','div','div','div','div',
-            'h2','div','div','div','div','div','h2','costom','font','costum','costum','div','div','div','div','div','div','div','none','div','div',
-            'div']#19
+alltags1 = ['div', 'div', 'div', 'div', 'div', 'p', 'div', 'div', 'div', 'div', 'div', 'div', 'div', 'div', 'div', 'div',
+            'div', 'div', 'div', 'h2', 'div', 'div', 'div', 'div', 'div', 'h2', 'costom', 'font', 'costum', 'costum',
+            'div', 'div', 'div', 'div', 'div', 'div', 'div', 'none', 'div', 'div', 'div', 'div', 'div', 'div', 'div',
+            'div', 'div', 'div', 'strong', 'div', 'div', 'div', 'div', 'div', 'div', 'div', 'pass']
 
-#allclasses
-#1 => para grow alt-odd
-#2 => para grow alt-even + para grow grow alt-odd
-#3 => gb-ilist gbox gleft1 + gb-ilist gbox gleft2 + gb-ilist gbox gright
-#4 => author-title
-#5 => kniha-left-rest
-#6 => articles_content
-#7 => main_item_text
-#8 => zaznam
-#9 => kniha
-#10 => center_block
-#11 => right-block
-#12 => author
-#13 => kniha(popis)
-#14 => title
-#15 => akce_foto
-#32 => productTitleContent
-#16 => nazev
-#17 => costom with <a>
-#18 =>polozka
-#24 => name
+# allclasses
+# 1 => para grow alt-odd
+# 2 => para grow alt-even + para grow grow alt-odd
+# 3 => gb-ilist gbox gleft1 + gb-ilist gbox gleft2 + gb-ilist gbox gright
+# 4 => author-title
+# 5 => kniha-left-rest
+# 6 => articles_content
+# 7 => main_item_text
+# 8 => zaznam
+# 9 => kniha
+# 10 => center_block
+# 11 => right-block
+# 12 => author
+# 13 => kniha(popis)
+# 14 => title
+# 15 => akce_foto
+# 16 => nazev
+# 17 => costom with <a>
+# 18 => polozka
+# 19 => item-header
+# 20 => nazev
+# 21 => author
+# 22 => (costum)
+# 23 => (costum)
+# 24 => wrapper_name_author
+# 25 => wrap-infor
+# 26 => bookContent
+# 27 => productTitle
+# 28 => shortDescription
+# 29 => item_info
+# 30 => book_txt
+# 31 => index_obsah_vnutri_kniha_autor
+# 32 => => productTitleContent
+# 33 => (all)
+# 34 => caption
+# 35 => produkt
+# 36 => pname
+# 37 => book
+# 38 => produkt pst-novinka
+# 39 => (all2)
+# 40 => (all3)
+# 41 => book_thumb
+# 42 => productList__description
+# 43 => grid__item seven-tenths (add <p>)
+# 44 => product-name
 
 
-allclasses = [1,2,2,2,3,4,5,6,7,8,9,2,10,2,2,2,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,2,29,30,31,32,33,34]#19
-alltags2 = ['h3','h3','h3','h3','h3','a','h3','h3','costum','costum','a','h3','h3','h3','h3','h3','a','costum','costum',
-            'costom','a','a','a','a','costom','a','costom','none','costum','none','div','h2','div','h2','h3','h3','h2','none','a','h2','pass']#19
+allclasses = [1, 2, 2, 2, 3, 4, 5, 6, 7, 8, 9, 2, 10, 2, 2, 2, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+              25, 26, 27, 28, 2, 29, 30, 31, 32, 33, 34, 35, 36, 32, 32, 37, 6, 38, 39, 40, 41, 42, 43, 32, 11, 44, 40]# 59
 
-print(len(alltags1))
-print(len(alltags2))
-print(len(allclasses))
+alltags2 = ['h3', 'h3', 'h3', 'h3', 'h3', 'a', 'h3', 'h3', 'costum', 'costum', 'a', 'h3', 'h3', 'h3', 'h3', 'h3', 'a',
+            'costum', 'costum', 'costom', 'a', 'a', 'a', 'a', 'costom', 'a', 'costom', 'none', 'costum', 'none', 'div',
+            'h2', 'div', 'h2', 'h3', 'h3', 'h2', 'none', 'a', 'h2', 'pass', 'a', 'a', 'a', 'a', 'h5', 'h3', 'h4',
+            'costum', 'h3', 'strong', 'a', 'h3', 'a', 'h5', 'h5', 'a']# 59
+
+
 print('\n')
 print("                     #######################################################################")
 print("                                                 THE BOOK HUNTER ®                          ")
 print('                     #######################################################################')
+print('                                                                       creator: Oliver Morgan')
 print('\n')
 print('Looking into: '+str(len(webpages))+' webpages')
 print('\n')
 index = 0
 procent = int(100/len(webpages))
-#main loop
+# main loop
 for web in webpages:
     page = requests.get(web)
     soup = BeautifulSoup(page.content, 'html.parser')
-    print(index+1)
-    print('web: ',str(web))
-    print('tag1: '+str(alltags1[index]))
-    print('class: '+str(allclasses[index]))
-    print('tag2: '+str(alltags2[index]))
+    # print(index+1)
+    # print('web: ',str(web))
+    # print('tag1: '+str(alltags1[index]))
+    # print('class: '+str(allclasses[index]))
+    # print('tag2: '+str(alltags2[index]))
 
     if __name__ == '__main__':
         found = retrieve_all_products(alltags1[index],allclasses[index],alltags2[index])
         Hunted = checkforkey(found, web, all)
-        print(len(Hunted) > 0)
-        print('\n')
-    #for element in Hunted:
-    #   print(element)
-    #    print('------------------------------------------------------')
-    #    all.append(element)
-    #    print('\n')
+        if len(Hunted) > 0:
+            print('\n')
+            for element in Hunted:
+                print(element)
+                print('-----------------------------------------------------------------------------------------------------')
+                all.append(element)
+                print('\n')
 
 
     index = index+1
-print(all)
+print(str(len(all))+' items found')
