@@ -530,3 +530,29 @@ for web in webpages:
 
     index = index+1
 print(str(len(all))+' items found')
+print('###################################### NEW #####################################')
+for book in allbooks:
+    for line in open('hunter.txt','r'):
+        if book not in line:
+            print(str(index)+'] '+str(book))
+            index = index+1
+            print('-----------------------------------------------------------------------------------------------------------')
+            print('\n')
+print(str(len(allbooks))+' items found')
+
+# inputing into file found
+
+# deleting all content
+
+f = open('hunter.txt', 'r+')
+f.truncate(0) # need '0' when using r+
+
+f.close()
+
+add = open('hunter.txt', 'w')
+for name in allbooks:
+    add.write(unidecode.unidecode(str(name).lower()+'\n'))
+add.write('here')
+
+add.close()
+print(allbooks)
