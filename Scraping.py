@@ -548,6 +548,19 @@ for book in allbooks:
             print('-----------------------------------------------------------------------------------------------------------')
             print('\n')
 print(str(len(allbooks))+' items found')
+print('###################################### NEW #####################################')
+nobooks = False
+for book in allbooks:
+ 
+        if book in open('hunter.txt','r'):
+            print(str(index)+'] '+str(book))
+            index = index+1
+            print('-----------------------------------------------------------------------------------------------------------')
+            print('\n')
+            nobooks = True
+if not nobooks:
+    print('NEWBOOKS')
+print(str(len(allbooks))+' items found')
 
 # inputing into file found
 
@@ -561,7 +574,6 @@ f.close()
 add = open('hunter.txt', 'w')
 for name in allbooks:
     add.write(unidecode.unidecode(str(name).lower()+'\n'))
-add.write('here')
+
 
 add.close()
-print(allbooks)
