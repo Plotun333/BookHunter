@@ -539,6 +539,15 @@ for book in allbooks:
             print('-----------------------------------------------------------------------------------------------------------')
             print('\n')
 print(str(len(allbooks))+' items found')
+print('###################################### NEW #####################################')
+for book in allbooks:
+    for line in open('hunter.txt','r'):
+        if book not in line:
+            print(str(index)+'] '+str(book))
+            index = index+1
+            print('-----------------------------------------------------------------------------------------------------------')
+            print('\n')
+print(str(len(allbooks))+' items found')
 
 # inputing into file found
 
